@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-//Todo test all methods
+//Todo test all public methods
 
 func TestCreate(t *testing.T) {
 	var cases = []struct {
