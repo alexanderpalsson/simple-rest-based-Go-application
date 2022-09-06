@@ -3,3 +3,6 @@ server:
 
 test-unit:
 	go test -v ./...
+
+lint:
+	golangci-lint run

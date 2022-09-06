@@ -16,7 +16,7 @@ var countersSingleton CountersStore
 
 type CountersStore interface {
 	Create(name string) error
-	Increment(name string) (int, error)
+	Increment(name string) error
 	GetOne(name string) (int, error)
 	GetAll() map[string]int
 }
@@ -35,6 +35,8 @@ func main() {
 		fmt.Println("error running http handler", err)
 	}
 }
+
+// TODO move routes to separate folder ./server/routes
 
 func createHandler(c *gin.Context) {
 	name, ok := parseNameParam(c)
@@ -56,13 +58,13 @@ func increaseHandler(c *gin.Context) {
 		return
 	}
 
-	increasedCount, err := countersSingleton.Increment(name)
+	err := countersSingleton.Increment(name)
 	if err != nil {
 		handleError(c, http.StatusBadRequest, err)
 		return
 	}
 
-	c.JSON(http.StatusOK, increasedCount)
+	c.Status(http.StatusNoContent)
 }
 
 func getOneHandler(c *gin.Context) {
@@ -77,7 +79,7 @@ func getOneHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, counter)
+	c.JSON(http.StatusOK, gin.H{name: counter})
 }
 
 func getAllHandler(c *gin.Context) {

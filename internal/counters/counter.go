@@ -26,18 +26,18 @@ func (c *InMemDB) Create(name string) error {
 	return nil
 }
 
-// Increment increments the associated counter by 1 based on passed name
-func (c *InMemDB) Increment(name string) (int, error) {
+// Increment increments the associated counter by 1 based on the passed name
+func (c *InMemDB) Increment(name string) error {
 	if _, ok := c.counters[name]; !ok {
-		return 0, errors.New("counter does not exist")
+		return errors.New("counter does not exist")
 	}
 
 	c.counters[name]++
 
-	return c.counters[name], nil
+	return nil
 }
 
-// GetOne returns the counter associated with passed name
+// GetOne returns the counter associated with the passed name
 func (c *InMemDB) GetOne(name string) (int, error) {
 	if _, ok := c.counters[name]; !ok {
 		return 0, errors.New("counter does not exist")
@@ -50,3 +50,5 @@ func (c *InMemDB) GetOne(name string) (int, error) {
 func (c *InMemDB) GetAll() map[string]int {
 	return c.counters
 }
+
+// TODO resets, deletions

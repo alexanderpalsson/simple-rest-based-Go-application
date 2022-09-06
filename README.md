@@ -9,5 +9,8 @@ API spec </br>
 * `GET    /get`         returns all counters        
 * `GET    /get/<name>`  returns counter `<name>`
 
-# Run test
+# Run tests
 `Make test-unit` will run all unit-tests
+
+# Run linter
+`Make lint`

@@ -1,3 +1,3 @@
 package test
 
-//TODO query all endpoints
+//TODO tests against all endpoint
